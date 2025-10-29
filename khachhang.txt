@@ -1,0 +1,3 @@
+KH01,Pham Minh D,0933445566,Vang
+KH02,Nguyen Thi E,0977889900,Bac
+KH03,Hoang Van F,0911223344,Thuong
