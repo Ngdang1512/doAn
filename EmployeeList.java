@@ -1,14 +1,16 @@
 package doAn;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class dsEmployee implements IManager {
+public class EmployeeList implements IManager {
 	Scanner scanner = new Scanner(System.in);
 
-	public dsEmployee() {
+	public EmployeeList() {
 	}
 
 	@Override
@@ -151,7 +153,24 @@ public class dsEmployee implements IManager {
 		} catch (IOException e) {
 			System.out.println("Error reading product file: " + e.getMessage());
 		}
+	}
 
+	public void writefile(String filename) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+			for (Employee e : DataStore.employeeList) {
+				String line = e.getId() + "," + 
+							  e.getName() + "," + 
+							  e.getPhoneNumber() + "," + 
+							  e.getPosition() + "," + 
+							  e.getSalary();
+				
+				bw.write(line);
+				bw.newLine();
+			}
+			System.out.println("Da ghi du lieu nhan vien vao file: " + filename);
+		} catch (IOException e) {
+			System.out.println("Loi khi ghi file nhan vien: " + e.getMessage());
+		}
 	}
 
 }

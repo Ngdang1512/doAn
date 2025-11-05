@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class dsKH implements IManager {
+public class CustomerList implements IManager {
 
 	Scanner scanner = new Scanner(System.in);
 
@@ -49,7 +49,6 @@ public class dsKH implements IManager {
 	}
 
 	@Override
-
 	public void sua(String id) {
 		for (int i = 0; i < DataStore.customerList.size(); i++) {
 			Customer customer = DataStore.customerList.get(i);
@@ -114,10 +113,19 @@ public class dsKH implements IManager {
 	@Override
 	public void xoa(String id) {
 		for (int i = 0; i < DataStore.customerList.size(); i++) {
+
+			Customer customer = DataStore.customerList.get(i);
+
 			if (DataStore.customerList.get(i).getId().equals(id)) {
+				String phoneToRemove = customer.getPhoneNumber();
+
 				DataStore.customerList.remove(i);
-				System.out.println("da xoa thanh cong. ");
 				Customer.decreaseTotalCustomer();
+
+				Customer.removeId(id);
+            	Customer.removePhone(phoneToRemove);
+
+				System.out.println("da xoa thanh cong. ");
 				return;
 
 			}
@@ -175,7 +183,6 @@ public class dsKH implements IManager {
 	}
 
 	public void writefile(String filename) {
-
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
 			for (Customer customer : DataStore.customerList) {
 				bw.write(customer.getId() + " ," + customer.getName() + " ," + customer.getPhoneNumber() + " ,"

@@ -2,9 +2,9 @@ package doAn;
 
 import java.util.Scanner;
 
-public class Main1 {
-    public static void main(String[] args, Scanner scanner) {
-        dsEmployee employeeManager = new dsEmployee(){}; // Tạo đối tượng quản lý nhân viên
+public class EmployeeManager {
+    public static void runEmployeeManager(String[] args, Scanner scanner) {
+        EmployeeList employeeManager = new EmployeeList(){}; // Tạo đối tượng quản lý nhân viên
         
             int choice;
             
@@ -15,7 +15,8 @@ public class Main1 {
                 System.out.println("3. xoa nhan vien");
                 System.out.println("4. tim kiem nhan vien bang id");
                 System.out.println("5. Xem danh sach nhan vien");
-                System.out.println("6.doc file");
+                System.out.println("6. Doc file nhan vien.");
+                System.out.println("7. Ghi file nhan vien.");
                 System.out.println("0. Thoat");
                 System.out.print("Nhap lua chon cua ban: ");
                 choice = scanner.nextInt();
@@ -52,9 +53,15 @@ public class Main1 {
                         System.out.println("\n--- Danh sach nhan vien ---");
                         employeeManager.xuat();
                     }
+
                     case 6 ->{
                         employeeManager.readfile("doAn/nhanvien.txt");
                     }
+
+                    case 7 ->{
+                        employeeManager.writefile("doAn/nhanvien.txt");
+                    }
+                    
                     case 0 -> System.out.println("Da thoat chuong trinh...");
                         
                     default -> System.out.println("Lua chon khong hop le! Vui long nhap mot tuy chon hop le.");

@@ -2,9 +2,9 @@ package doAn;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args, Scanner scanner) throws IOException {
-        dsKH customerManager = new dsKH();
+public class CustomerManager {
+    public static void runCustomerManager(String[] args, Scanner scanner) throws IOException {
+        CustomerList customerManager = new CustomerList();
        
             int choice;
             
@@ -59,7 +59,7 @@ public class Main {
                     }
 
                     case 7 ->{
-                        customerManager.writefile("writeKH.txt");
+                        customerManager.writefile("doAn/khachhang.txt");
                     }
                         
                     case 0 -> System.out.println("Da thoat chuong trinh...");

@@ -1,3 +1,10 @@
-SP01,Sua tuoi,15000,50
-SP02,Banh quy,12000,100
-SP03,Nuoc ngot,10000,80
+FOOD,SP01,Sua tuoi Vinamilk,30000,100,2025-12-31
+FOOD,SP02,Banh Mi Sandwich,25000,50,2025-11-10
+HOUSEHOLD,SP03,Nuoc lau san Sunlight,45000,80,Ve sinh
+HOUSEHOLD,SP04,Giay an Vietnam Airlines,20000,200,Tieu dung
+FOOD,SP05,Tao Gala My,60000,30,2025-11-15
+FOOD,SP06,Xuc xich CP,35000,70,2026-01-20
+HOUSEHOLD,SP07,Chen su Minh Long,50000,40,Nha bep
+HOUSEHOLD,SP08,Pin AA Panasonic,15000,150,Dien tu
+FOOD,SP09,Mi Hao Hao,4000,500,2026-05-01
+HOUSEHOLD,SP10,Dao cao rau Gillette,80000,25,Ca nhan

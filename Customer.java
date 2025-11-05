@@ -41,7 +41,7 @@ public class Customer extends Person {
     // Ghi đè toString() để trả về thông tin chi tiết của Customer
     @Override
     public String toString() {
-        return super.toString() + ", so hang khach hang: " + membershipLevel;
+        return super.toString() + ", Level: " + membershipLevel;
     }
 
     @Override
@@ -65,5 +65,13 @@ public class Customer extends Person {
 
     public static boolean isPhoneExists(String phone) {
         return existingPhones.contains(phone);
+    }
+
+    public static void removeId(String id) {
+        existingIds.remove(id);
+    }
+
+    public static void removePhone(String phone) {
+        existingPhones.remove(phone);
     }
 }

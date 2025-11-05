@@ -2,10 +2,10 @@ package doAn;
 
 import java.util.Scanner;
 
-public class Main2 {
+public class ProductManager {
     
-    public static void main(String[] args,Scanner scanner) {
-        dsSanpham ProductManager = new dsSanpham();
+    public static void runProductManager(String[] args,Scanner scanner) {
+        ProductList ProductManager = new ProductList();
        
             int choice;
                 
@@ -16,7 +16,8 @@ public class Main2 {
                     System.out.println("3. xoa san pham");
                     System.out.println("4. tim kiem san pham bang id");
                     System.out.println("5. Xem danh sach san pham");
-                    System.out.println("6. Doc file");
+                    System.out.println("6. Doc file san pham.");
+                    System.out.println("7. Ghi file san pham.");
                     System.out.println("0. Thoat");
                     System.out.print("Nhap lua chon cua ban: ");
                     choice = scanner.nextInt();
@@ -53,9 +54,15 @@ public class Main2 {
                             System.out.println("\n--- Danh sach san pham ---");
                             ProductManager.xuat();
                         }
+
                         case 6->{
                             ProductManager.readfile("doAn/sanpham.txt");
                         }
+
+                        case 7 ->{
+                            ProductManager.writefile("doAn/sanpham.txt");
+                        }
+                        
                         case 0 -> System.out.println("Da thoat chuong trinh...");
                             
                         default -> System.out.println("Lua chon khong hop le! Vui long nhap mot tuy chon hop le.");

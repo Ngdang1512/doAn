@@ -1,8 +1,7 @@
 package doAn;
 
 public class Employee extends Person {
-    private static int totalEmployees = 0; // Đếm số lượng nhân viên
-
+    private static int totalEmployees = 0;
     private String position;
     private double salary;
 

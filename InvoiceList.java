@@ -1,21 +1,23 @@
 package doAn;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class dsHoadon implements IManager {
-    ArrayList<Hoadon> hoadonlist;
-    dsKH customerManager; // Liên kết với danh sách khách hàng
-    dsSanpham productManager; // Liên kết với danh sách sản phẩm
-    dsEmployee employeeManager;
+public class InvoiceList implements IManager {
+    ArrayList<Invoice> hoadonlist;
+    CustomerList customerManager; // Liên kết với danh sách khách hàng
+    ProductList productManager; // Liên kết với danh sách sản phẩm
+    EmployeeList employeeManager;
     Scanner scanner = new Scanner(System.in);
 
-    public dsHoadon(dsKH customerManager, dsSanpham productManager, dsEmployee employeeManager) {
+    public InvoiceList(CustomerList customerManager, ProductList productManager, EmployeeList employeeManager) {
         this.hoadonlist = new ArrayList<>();
         this.customerManager = customerManager;
         this.productManager = productManager;
@@ -30,7 +32,7 @@ public class dsHoadon implements IManager {
             System.out.print("Nhap ma hoa don: ");
             id = scanner.nextLine();
             boolean exists = false;
-            for (Hoadon hd : hoadonlist) {
+            for (Invoice hd : hoadonlist) {
                 if (hd.getid().equals(id)) {
                     exists = true;
                     break;
@@ -107,7 +109,7 @@ public class dsHoadon implements IManager {
         if (thoigian.trim().isEmpty()) {
             thoigian = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         }
-        Hoadon newhoadon = new Hoadon(id, customer, employee, thoigian);
+        Invoice newhoadon = new Invoice(id, customer, employee, thoigian);
 
         // Chọn sản phẩm từ danh sách
         System.out.println("--- Danh Sach San Pham ---");
@@ -162,7 +164,7 @@ public class dsHoadon implements IManager {
                 while (true) {
                     newid = scanner.nextLine();
                     boolean exists = false;
-                    for (Hoadon hd : hoadonlist) {
+                    for (Invoice hd : hoadonlist) {
                         if (hd.getid().equals(newid) && !hd.getid().equals(id)) {
                             exists = true;
                             break;
@@ -170,7 +172,7 @@ public class dsHoadon implements IManager {
                     }
                     if (!exists)
                         break;
-                    System.out.println("Mã hóa đơn đã tồn tại, vui lòng nhập lại!");
+                    System.out.println("Ma hoa don da ton tai, vui long nhap lai!");
                 }
 
                 System.out.println("--- Danh Sach Khach Hang ---");
@@ -182,7 +184,7 @@ public class dsHoadon implements IManager {
                 for (Customer c : DataStore.customerList) {
                     if (c.getId().equals(customerId)) {
                         customer = c;
-                        break; // Dừng vòng lặp ngay khi tìm thấy khách hàng
+                        break;
                     }
                 }
                 if (customer == null) {
@@ -221,7 +223,7 @@ public class dsHoadon implements IManager {
 
                 } while (employee == null);
 
-                Hoadon newhoadon = new Hoadon(newid, customer, employee);
+                Invoice newhoadon = new Invoice(newid, customer, employee);
 
                 // Chọn sản phẩm từ danh sách
                 System.out.println("--- Danh Sach San Pham ---");
@@ -283,7 +285,7 @@ public class dsHoadon implements IManager {
 
     @Override
     public void timkiem(String id) {
-        for (Hoadon hoadon : hoadonlist) {
+        for (Invoice hoadon : hoadonlist) {
             if (hoadon.getid().equals(id)) {
                 System.out.println(hoadon.toString());
                 return;
@@ -299,7 +301,7 @@ public class dsHoadon implements IManager {
         if (hoadonlist.isEmpty()) {
             System.out.println("Danh sach hoa don trong.");
         } else {
-            for (Hoadon invoice : hoadonlist) {
+            for (Invoice invoice : hoadonlist) {
                 System.out.println(invoice.toString());
             }
         }
@@ -339,7 +341,7 @@ public class dsHoadon implements IManager {
                     System.out.println(" Bo qua hoa don nay.");
                     continue;
                 }
-                Hoadon hoadon = new Hoadon(invoiceId, customer, employee);
+                Invoice hoadon = new Invoice(invoiceId, customer, employee);
                 for (String pd : productData) {
                     String[] productParts = pd.split("-");
                     String productId = productParts[0];
@@ -369,4 +371,34 @@ public class dsHoadon implements IManager {
         }
     }
 
+    public void writefile(String filename) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+			for (Invoice hd : this.hoadonlist) { 
+				String invoiceId = hd.getid();
+				String customerId = hd.getCustomer().getId(); 
+				String employeeId = hd.getEmployee().getId(); 
+	
+				StringBuilder productData = new StringBuilder();
+				
+				ArrayList<InvoiceDetails> details = hd.getDetailsList(); 
+				
+				for (int i = 0; i < details.size(); i++) {
+					InvoiceDetails detail = details.get(i);
+					
+					productData.append(detail.getProduct().getId() + "-" + detail.getQuantity());
+					
+					if (i < details.size() - 1) {
+						productData.append(";"); 
+					}
+				}
+	
+				String line = invoiceId + ", " + customerId + ", " + employeeId + ", " + productData.toString();
+				bw.write(line);
+				bw.newLine();
+			}
+			System.out.println("Da ghi du lieu hoa don vao file: " + filename);
+		} catch (IOException e) {
+			System.out.println("Loi khi ghi file hoa don: " + e.getMessage());
+		}
+	}
 }

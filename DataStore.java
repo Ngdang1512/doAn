@@ -14,7 +14,7 @@ public class DataStore {
     public static List<Product> productList = new ArrayList<>();
 
     // Danh sach hoa don
-    public static List<Hoadon> invoiceList = new ArrayList<>();
+    public static List<Invoice> invoiceList = new ArrayList<>();
 
     public static boolean isPhoneExistsAll(String sdt) {
         for (Customer kh : customerList) {

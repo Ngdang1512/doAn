@@ -1,6 +1,6 @@
 package doAn;
 
-public class Product {
+public abstract class Product {
 
     private String id;
     private String name;
@@ -13,6 +13,8 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
     }
+
+    public abstract String getDescription();
 
     // Getter và Setter
     public String getId() {

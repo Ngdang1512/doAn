@@ -2,15 +2,13 @@ package doAn;
 
 import java.util.Scanner;
 
-public class Main3 {
-    public static void main(String[] args, Scanner scanner) {
-        // Khởi tạo danh sách khách hàng, sản phẩm, và nhân viên
-        dsKH customerManager = new dsKH();
-        dsSanpham productManager = new dsSanpham();
-        dsEmployee employeeManager = new dsEmployee();
+public class invoiceManager {
+    public static void runInvoiceManager(String[] args, Scanner scanner) {
+        CustomerList customerManager = new CustomerList();
+        ProductList productManager = new ProductList();
+        EmployeeList employeeManager = new EmployeeList();
 
-        // Khởi tạo danh sách hóa đơn
-        dsHoadon invoiceManager = new dsHoadon(customerManager, productManager, employeeManager);
+        InvoiceList invoiceManager = new InvoiceList(customerManager, productManager, employeeManager);
 
        
             int choice;
@@ -21,7 +19,8 @@ public class Main3 {
                 System.out.println("3. Xoa hoa don");
                 System.out.println("4. Tim kiem hoa don");
                 System.out.println("5. Hien thi tat ca hoa don");
-                System.out.println("6. Doc file");
+                System.out.println("6. Doc file hoa don.");
+                System.out.println("7. Ghi file hoa don.");
                 System.out.println("0. Thoat chuong trinh");
                 System.out.print("Nhap lua chon cua ban: ");
 
@@ -29,30 +28,36 @@ public class Main3 {
                 scanner.nextLine(); 
                 
                 switch (choice) {
-                    case 1 -> invoiceManager.them();  // Thêm hóa đơn mới
+                    case 1 -> invoiceManager.them();
                         
                     case 2 -> {
                         System.out.print("Nhap ma hoa don can sua: ");
                         String updateId = scanner.nextLine();
-                        invoiceManager.sua(updateId);  // Sửa hóa đơn theo ID
+                        invoiceManager.sua(updateId);
                     }
                         
                     case 3 -> {
                         System.out.print("Nhap ma hoa don can xoa: ");
                         String deleteId = scanner.nextLine();
-                        invoiceManager.xoa(deleteId);  // Xóa hóa đơn theo ID
+                        invoiceManager.xoa(deleteId);
                     }
                         
                     case 4 -> {
                         System.out.print("Nhap ma hoa don can tim: ");
                         String searchId = scanner.nextLine();
-                        invoiceManager.timkiem(searchId);  // Tìm kiếm hóa đơn theo ID
+                        invoiceManager.timkiem(searchId);
                     }
-                    case 5 -> invoiceManager.xuat();  // Hiển thị tất cả hóa đơn
+
+                    case 5 -> invoiceManager.xuat();
 
                     case 6->{
                         invoiceManager.readfile("doAn/hoadon.txt");
                     }
+
+                    case 7 ->{
+                        customerManager.writefile("doAn/khachhang.txt");
+                    }
+                    
                     case 0 -> System.out.println("Thoat chuong trinh.");
                         
                     default -> System.out.println("Lua chon khong hop le! Vui long nhap mot tuy chon hop le.");
