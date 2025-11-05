@@ -21,8 +21,17 @@ public class CustomerList implements IManager {
 		while (true) {
 			System.out.println("nhap id KH can them: ");
 			id = scanner.nextLine();
-			if (!Customer.isIdExists(id)) {
-				break;
+
+			boolean exists = false;
+			for (Customer c : DataStore.customerList) {
+				if (c.getId().equals(id)) {
+					exists = true;
+					break;
+				}
+			}
+			
+			if (!exists) {
+				break; // ID này hợp lệ, thoát vòng lặp
 			}
 			System.out.println("ID da ton tai, vui long nhap lai!");
 		}
@@ -31,10 +40,12 @@ public class CustomerList implements IManager {
 		while (true) {
 			System.out.println("nhap sdt KH can them: ");
 			sdt = scanner.nextLine();
+
 			if (!sdt.matches("\\d{10}")) {
 				System.out.println("So dien thoai phai la 10 so!");
 				continue;
 			}
+
 			if (!DataStore.isPhoneExistsAll(sdt)) {
 				break;
 			}
@@ -73,7 +84,17 @@ public class CustomerList implements IManager {
 						while (true) {
 							System.out.println("Nhap ID moi: ");
 							newid = scanner.nextLine();
-							if (!Customer.isIdExists(newid) || newid.equals(customer.getId())) {
+
+							boolean exists = false;
+							for (Customer c : DataStore.customerList) {
+								if (c.getId().equals(newid)) {
+									exists = true;
+									break;
+								}
+							}
+
+							// Cho phép nếu ID không tồn tại, HOẶC nếu ID mới là ID cũ
+							if (!exists || newid.equals(customer.getId())) {
 								break;
 							}
 							System.out.println("ID da ton tai, vui long nhap lai!");
@@ -85,7 +106,8 @@ public class CustomerList implements IManager {
 						while (true) {
 							System.out.println("Nhap so dien thoai moi: ");
 							newsdt = scanner.nextLine();
-							if (!Customer.isPhoneExists(newsdt) || newsdt.equals(customer.getPhoneNumber())) {
+
+							if (!DataStore.isPhoneExistsAll(newsdt) || newsdt.equals(customer.getPhoneNumber())) {
 								break;
 							}
 							System.out.println("So dien thoa da ton tai, vui long nhap lai!");
@@ -113,21 +135,11 @@ public class CustomerList implements IManager {
 	@Override
 	public void xoa(String id) {
 		for (int i = 0; i < DataStore.customerList.size(); i++) {
-
-			Customer customer = DataStore.customerList.get(i);
-
 			if (DataStore.customerList.get(i).getId().equals(id)) {
-				String phoneToRemove = customer.getPhoneNumber();
-
 				DataStore.customerList.remove(i);
-				Customer.decreaseTotalCustomer();
-
-				Customer.removeId(id);
-            	Customer.removePhone(phoneToRemove);
-
 				System.out.println("da xoa thanh cong. ");
+				Customer.decreaseTotalCustomer();
 				return;
-
 			}
 		}
 		System.out.println("khong tim thay id KH trong ds. ");

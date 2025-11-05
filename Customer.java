@@ -7,25 +7,10 @@ import java.util.Set;
 public class Customer extends Person {
     private String membershipLevel;
 
-    // Set lưu trữ tất cả ID đã dùng
-    private static final Set<String> existingIds = new HashSet<>();
-    private static final Set<String> existingPhones = new HashSet<>();
-
     private static int totalcustomers = 0; // Đếm số lượng nhân viên
 
     public Customer(String id, String name, String sdt, String membershipLevel) {
         super(id, name, sdt);
-
-        if (existingIds.contains(id)) {
-            throw new IllegalArgumentException("ID da ton tai: " + id);
-        }
-        if (existingPhones.contains(sdt)) {
-            throw new IllegalArgumentException("So dien thoai da ton tai: " + sdt);
-        }
-
-        existingIds.add(id);
-        existingPhones.add(sdt);
-
         this.membershipLevel = membershipLevel;
         totalcustomers++;
     }
@@ -57,21 +42,5 @@ public class Customer extends Person {
 
     public static int gettotalcustomer() {
         return totalcustomers;
-    }
-
-    public static boolean isIdExists(String id) {
-        return existingIds.contains(id);
-    }
-
-    public static boolean isPhoneExists(String phone) {
-        return existingPhones.contains(phone);
-    }
-
-    public static void removeId(String id) {
-        existingIds.remove(id);
-    }
-
-    public static void removePhone(String phone) {
-        existingPhones.remove(phone);
     }
 }
