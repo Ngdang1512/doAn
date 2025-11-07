@@ -21,7 +21,6 @@ public class CustomerList implements IManager {
 		while (true) {
 			System.out.println("nhap id KH can them: ");
 			id = scanner.nextLine();
-
 			boolean exists = false;
 			for (Customer c : DataStore.customerList) {
 				if (c.getId().equals(id)) {
@@ -31,7 +30,7 @@ public class CustomerList implements IManager {
 			}
 			
 			if (!exists) {
-				break; // ID này hợp lệ, thoát vòng lặp
+				break; // ID hợp lệ
 			}
 			System.out.println("ID da ton tai, vui long nhap lai!");
 		}
@@ -40,12 +39,10 @@ public class CustomerList implements IManager {
 		while (true) {
 			System.out.println("nhap sdt KH can them: ");
 			sdt = scanner.nextLine();
-
 			if (!sdt.matches("\\d{10}")) {
 				System.out.println("So dien thoai phai la 10 so!");
 				continue;
 			}
-
 			if (!DataStore.isPhoneExistsAll(sdt)) {
 				break;
 			}
@@ -84,7 +81,6 @@ public class CustomerList implements IManager {
 						while (true) {
 							System.out.println("Nhap ID moi: ");
 							newid = scanner.nextLine();
-
 							boolean exists = false;
 							for (Customer c : DataStore.customerList) {
 								if (c.getId().equals(newid)) {
@@ -106,7 +102,12 @@ public class CustomerList implements IManager {
 						while (true) {
 							System.out.println("Nhap so dien thoai moi: ");
 							newsdt = scanner.nextLine();
-
+							if (!newsdt.matches("\\d{10}")) {
+								System.out.println("So dien thoai phai la 10 so!");
+								continue;
+							}
+							
+							// Kiểm tra SĐT mới bằng hàm chung của DataStore
 							if (!DataStore.isPhoneExistsAll(newsdt) || newsdt.equals(customer.getPhoneNumber())) {
 								break;
 							}
@@ -137,8 +138,8 @@ public class CustomerList implements IManager {
 		for (int i = 0; i < DataStore.customerList.size(); i++) {
 			if (DataStore.customerList.get(i).getId().equals(id)) {
 				DataStore.customerList.remove(i);
-				System.out.println("da xoa thanh cong. ");
 				Customer.decreaseTotalCustomer();
+				System.out.println("da xoa thanh cong. ");
 				return;
 			}
 		}
