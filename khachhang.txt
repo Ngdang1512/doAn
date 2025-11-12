@@ -1,11 +1,11 @@
-KH01 ,Nguyen Van An ,0901234567 ,Vang
-KH02 ,Tran Thi Binh ,0912345678 ,Bac
-KH03 ,Le Hoang Canh ,0987654321 ,Bac
-KH04 ,Pham Minh Duy ,0934567890 ,Dong
-KH05 ,Vo Ngoc Em ,0978123456 ,Thuong
-KH06 ,Do Gia Han ,0905678123 ,Vang
-KH07 ,Bui The Khanh ,0918765432 ,Thuong
-KH08 ,Ly My Linh ,0945123789 ,Bac
-KH09 ,Hoang Tuan Minh ,0909090909 ,Dong
-KH10 ,Dang Phuong Nam ,0967890123 ,Thuong
-KH11 ,Nguyen Van A ,0974691811 ,Thuong
+KH01,Nguyen Van An,0901234567,Vang
+KH02,Tran Thi Binh,0912345678,Bac
+KH03,Le Hoang Canh,0987654321,Bac
+KH04,Pham Minh Duy,0934567890,Dong
+KH05,Vo Ngoc Em,0978123456,Thuong
+KH06,Do Gia Han,0905678123,Vang
+KH07,Bui The Khanh,0918765432,Thuong
+KH08,Ly My Linh,0945123789,Bac
+KH09,Hoang Tuan Minh,0909090909,Dong
+KH10,Dang Phuong Nam,0967890123,Thuong
+KH11,Nguyen Van A,0974691811,Thuong

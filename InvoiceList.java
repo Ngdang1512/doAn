@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InvoiceList implements IManager {
-    ArrayList<Invoice> hoadonlist;
     CustomerList customerManager; // Liên kết với danh sách khách hàng
-    ProductList productManager; // Liên kết với danh sách sản phẩm
     EmployeeList employeeManager;
+    ProductList productManager; // Liên kết với danh sách sản phẩm
+    ArrayList<Invoice> hoadonlist;
     Scanner scanner = new Scanner(System.in);
 
     public InvoiceList(CustomerList customerManager, ProductList productManager, EmployeeList employeeManager) {
@@ -312,10 +312,10 @@ public class InvoiceList implements IManager {
             String line;
             while ((line = br.readLine()) != null) {
 
-                String[] data = line.split(", ");
-                String invoiceId = data[0];
-                String customerId = data[1];
-                String employeeId = data[2];
+                String[] data = line.split(",");
+                String invoiceId = data[0].trim();
+                String customerId = data[1].trim();
+                String employeeId = data[2].trim();
                 String[] productData = data[3].split(";");
 
                 Customer customer = null;

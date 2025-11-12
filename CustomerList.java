@@ -198,7 +198,7 @@ public class CustomerList implements IManager {
 	public void writefile(String filename) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
 			for (Customer customer : DataStore.customerList) {
-				bw.write(customer.getId() + " ," + customer.getName() + " ," + customer.getPhoneNumber() + " ,"
+				bw.write(customer.getId() + "," + customer.getName() + "," + customer.getPhoneNumber() + ","
 						+ ((Customer) customer).getMembershipLevel());
 				bw.newLine();
 			}

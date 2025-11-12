@@ -86,7 +86,7 @@ public class Invoice {
         sb.append("Khach hang: ").append(customer.getName()).append(" (ID: ").append(customer.getId()).append(")\n");
         sb.append("Nhan vien: ").append(employee.getName()).append(" (ID: ").append(employee.getId()).append(")\n");
         sb.append("--------------- San Pham ---------------\n");
-        sb.append(String.format("%-10s %-20s %-10s %-10s\n",
+        sb.append(String.format("%-10s %-20s %-10s %-10s %-10s\n",
         "ID", "Ten", "Gia", "So luong", "Thanh tien"));
         for (InvoiceDetails detail : this.detailsList) {
             sb.append(detail.toString()).append("\n");
